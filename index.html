@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鳗鱼不想动 · 一个喜欢浪漫的人</title>
+
+<meta name="description" content="鳗鱼不想动的个人主页：热情开朗，多才多艺，喜欢浪漫，也认真对待每一件正经事。">
+<meta name="author" content="鳗鱼不想动">
+<meta name="theme-color" content="#fdfaf6">
+
+<!-- 分享到社交平台时显示的卡片信息 -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="鳗鱼不想动 · 一个喜欢浪漫的人">
+<meta property="og:description" content="热情开朗，多才多艺，喜欢浪漫，也认真对待每一件正经事。">
+<meta property="og:url" content="https://maryn0128.github.io/">
+
+<!-- 网站图标：直接用一段 SVG，不额外请求图片文件 -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23fdfaf6'/><text y='72' x='50' text-anchor='middle' font-size='58' font-family='serif' fill='%23c2607a'>鳗</text></svg>">
+
+<style>
+/* ==========================================================
+   1. 设计变量
+   想换配色，只改这一块就行（下面所有颜色都引用这里的变量）
+   ========================================================== */
+:root {
+  --cream:   #fdfaf6;   /* 页面底色，暖白 */
+  --paper:   #ffffff;   /* 卡片底色 */
+  --ink:     #2c2624;   /* 主文字，偏暖的黑 */
+  --ink-2:   #5d5450;   /* 次要文字 */
+  --muted:   #8c817b;   /* 更淡的说明文字 */
+  --line:    #ebe1d8;   /* 分隔线 / 边框 */
+
+  --rose:    #c2607a;   /* 主色：玫瑰 */
+  --caramel: #b98a5e;   /* 辅色：焦糖 */
+  --lav:     #8f7bb3;   /* 点缀：薰衣草 */
+
+  --serif: "Songti SC", "STSong", "SimSun", Georgia, "Times New Roman", serif;
+  --sans:  "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", system-ui, -apple-system, sans-serif;
+
+  --radius: 18px;
+  --max: 1040px;
+}
+
+/* ==========================================================
+   2. 基础样式
+   ========================================================== */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* 背景里两团很淡的光，让纯色底不那么平 */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: .5;
+  pointer-events: none;
+}
+body::before {
+  width: 520px; height: 520px;
+  top: -180px; left: -140px;
+  background: radial-gradient(circle, #f6dfe4 0%, rgba(246,223,228,0) 70%);
+}
+body::after {
+  width: 620px; height: 620px;
+  bottom: -260px; right: -200px;
+  background: radial-gradient(circle, #eee6f5 0%, rgba(238,230,245,0) 70%);
+}
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+a { color: var(--rose); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* 键盘聚焦时的可见边框，方便只用键盘的人 */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+/* ==========================================================
+   3. 顶部导航
+   ========================================================== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(14px);
+  background: rgba(253, 250, 246, .78);
+  border-bottom: 1px solid rgba(235, 225, 216, .7);
+}
+.nav .inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.nav .brand {
+  font-family: var(--serif);
+  font-size: 17px;
+  letter-spacing: .06em;
+  color: var(--ink);
+}
+.nav .links {
+  display: flex;
+  gap: 22px;
+  font-size: 14px;
+}
+.nav .links a {
+  color: var(--ink-2);
+  position: relative;
+}
+.nav .links a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -4px;
+  width: 0; height: 1px;
+  background: var(--rose);
+  transition: width .3s ease;
+}
+.nav .links a:hover { color: var(--rose); text-decoration: none; }
+.nav .links a:hover::after { width: 100%; }
+
+/* ==========================================================
+   4. 首屏
+   ========================================================== */
+.hero {
+  min-height: 86vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 92px 0 72px;
+  position: relative;
+}
+
+.hero .eyebrow {
+  font-size: 13px;
+  letter-spacing: .28em;
+  color: var(--caramel);
+  margin: 0 0 22px;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(42px, 8vw, 82px);
+  line-height: 1.16;
+  font-weight: 500;
+  letter-spacing: .02em;
+  margin: 0 0 8px;
+}
+.hero h1 .lazy {
+  display: inline-block;
+  color: var(--muted);
+  font-size: .52em;
+  letter-spacing: .1em;
+  vertical-align: middle;
+  margin-left: .12em;
+}
+
+/* 名字下面那道会生长的色带 */
+.hero .rule {
+  width: 88px;
+  height: 3px;
+  border-radius: 2px;
+  margin: 26px 0 30px;
+  background: linear-gradient(90deg, var(--rose), var(--caramel), var(--lav));
+  transform-origin: left;
+  animation: grow 1.1s cubic-bezier(.2,.8,.2,1) .2s both;
+}
+@keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+.hero .lead {
+  max-width: 600px;
+  font-size: clamp(16px, 1.9vw, 19px);
+  color: var(--ink-2);
+  margin: 0 0 12px;
+}
+.hero .lead em {
+  font-style: normal;
+  color: var(--rose);
+  border-bottom: 1px dotted rgba(194, 96, 122, .5);
+}
+
+.hero .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: 999px;
+  font-size: 15px;
+  border: 1px solid transparent;
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+.btn-solid {
+  background: var(--ink);
+  color: #fdfaf6;
+}
+.btn-solid:hover {
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(44, 38, 36, .18);
+}
+.btn-ghost {
+  border-color: var(--line);
+  color: var(--ink-2);
+  background: rgba(255, 255, 255, .6);
+}
+.btn-ghost:hover {
+  text-decoration: none;
+  transform: translateY(-2px);
+  border-color: var(--rose);
+  color: var(--rose);
+}
+
+/* 首屏右侧缓慢漂浮的两颗小球，纯装饰 */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+.orb-1 {
+  width: 150px; height: 150px;
+  right: 4%; top: 18%;
+  background: linear-gradient(140deg, #f7dde3, #f3e7d8);
+  animation: float 9s ease-in-out infinite;
+}
+.orb-2 {
+  width: 74px; height: 74px;
+  right: 20%; top: 58%;
+  background: linear-gradient(140deg, #e9e1f2, #f6e6ea);
+  animation: float 12s ease-in-out infinite reverse;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-26px); }
+}
+
+/* ==========================================================
+   5. 通用区块
+   ========================================================== */
+.section { padding: 84px 0; }
+.section + .section { border-top: 1px solid var(--line); }
+
+.section-head { margin-bottom: 42px; }
+.section-head .tag {
+  display: block;
+  font-size: 12px;
+  letter-spacing: .24em;
+  color: var(--caramel);
+  margin-bottom: 12px;
+}
+.section-head h2 {
+  font-family: var(--serif);
+  font-size: clamp(26px, 4vw, 36px);
+  font-weight: 500;
+  letter-spacing: .02em;
+  margin: 0;
+}
+
+/* 滚动进入视口时才淡入 —— 由页面底部的 JS 添加 .in */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.in { opacity: 1; transform: none; }
+
+/* ==========================================================
+   6. 关于我
+   ========================================================== */
+.about {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+.about p { margin: 0 0 20px; color: var(--ink-2); }
+.about p:last-child { margin-bottom: 0; }
+.about strong { color: var(--ink); font-weight: 600; }
+
+.facts {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px 28px;
+}
+.facts dl { margin: 0; }
+.facts dt {
+  font-size: 12px;
+  letter-spacing: .16em;
+  color: var(--muted);
+  margin-top: 18px;
+}
+.facts dt:first-child { margin-top: 0; }
+.facts dd {
+  margin: 4px 0 0;
+  font-family: var(--serif);
+  font-size: 17px;
+  color: var(--ink);
+}
+
+/* ==========================================================
+   7. 四个特质
+   ========================================================== */
+.traits {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.trait {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 30px 30px 26px;
+  overflow: hidden;
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+.trait:hover {
+  transform: translateY(-4px);
+  border-color: #dfd0c4;
+  box-shadow: 0 16px 34px rgba(44, 38, 36, .07);
+}
+.trait .no {
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--caramel);
+  letter-spacing: .12em;
+}
+.trait h3 {
+  font-family: var(--serif);
+  font-size: 21px;
+  font-weight: 500;
+  margin: 10px 0 10px;
+}
+.trait p {
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--ink-2);
+  line-height: 1.85;
+}
+/* 每张卡片右上角的一小团颜色，呼应不同性格 */
+.trait::after {
+  content: "";
+  position: absolute;
+  width: 120px; height: 120px;
+  top: -46px; right: -46px;
+  border-radius: 50%;
+  opacity: .5;
+  background: radial-gradient(circle, #f6e3e8, rgba(246,227,232,0));
+}
+.trait:nth-child(2)::after { background: radial-gradient(circle, #f2e8da, rgba(242,232,218,0)); }
+.trait:nth-child(3)::after { background: radial-gradient(circle, #eee6f5, rgba(238,230,245,0)); }
+.trait:nth-child(4)::after { background: radial-gradient(circle, #e6eef0, rgba(230,238,240,0)); }
+
+/* ==========================================================
+   8. 作品
+   ========================================================== */
+.work {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 0;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  overflow: hidden;
+}
+
+/* 左边用纯 CSS 画一个游戏界面缩略图，不依赖任何图片文件 */
+.work-cover {
+  background: linear-gradient(150deg, #f7e7ea 0%, #f4ede0 55%, #eee8f4 100%);
+  padding: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+}
+.mock {
+  width: 100%;
+  max-width: 230px;
+  background: rgba(255, 255, 255, .82);
+  border: 1px solid rgba(255, 255, 255, .9);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 18px 40px rgba(44, 38, 36, .1);
+}
+.mock .mock-title {
+  font-family: var(--serif);
+  font-size: 14px;
+  text-align: center;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.mock .mock-stats {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.mock .mock-stat {
+  flex: 1;
+  background: #faf6f1;
+  border-radius: 8px;
+  padding: 6px;
+  text-align: center;
+  font-size: 9px;
+  color: var(--muted);
+}
+.mock .mock-stat b {
+  display: block;
+  font-size: 15px;
+  color: var(--rose);
+  font-family: var(--serif);
+}
+.mock .mock-input {
+  height: 30px;
+  border: 1px solid #ecdfe3;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.mock .mock-msg {
+  text-align: center;
+  font-size: 11px;
+  color: var(--caramel);
+  letter-spacing: .1em;
+}
+.mock .chips { display: flex; gap: 5px; justify-content: center; }
+.mock .chips span {
+  width: 22px; height: 16px;
+  border-radius: 999px;
+  background: #f6e7ea;
+}
+
+.work-body { padding: 38px 40px; }
+.work-body .kicker {
+  font-size: 12px;
+  letter-spacing: .2em;
+  color: var(--caramel);
+}
+.work-body h3 {
+  font-family: var(--serif);
+  font-size: 25px;
+  font-weight: 500;
+  margin: 10px 0 12px;
+}
+.work-body p {
+  margin: 0 0 18px;
+  color: var(--ink-2);
+  font-size: 15px;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding: 0;
+  list-style: none;
+}
+.tags li {
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: #fbf4f1;
+  color: #9c6b53;
+  border: 1px solid #f2e3dc;
+}
+.work-links { display: flex; flex-wrap: wrap; gap: 22px; font-size: 14px; }
+.work-links a { display: inline-flex; align-items: center; gap: 6px; }
+
+/* ==========================================================
+   9. 结尾 + 页脚
+   ========================================================== */
+.outro {
+  text-align: center;
+  padding: 96px 0 104px;
+}
+.outro .hi {
+  font-family: var(--serif);
+  font-size: clamp(26px, 5vw, 42px);
+  font-weight: 500;
+  margin: 0 0 16px;
+  letter-spacing: .04em;
+}
+.outro p {
+  color: var(--ink-2);
+  margin: 0 0 30px;
+}
+.contact-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 26px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15px;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.contact-box:hover {
+  text-decoration: none;
+  transform: translateY(-2px);
+  border-color: var(--rose);
+  box-shadow: 0 14px 30px rgba(194, 96, 122, .12);
+}
+.contact-box .icon { display: flex; color: var(--rose); }
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 30px 0 40px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+}
+footer .dot { margin: 0 8px; color: #d8c9bd; }
+
+/* ==========================================================
+   10. 手机屏幕
+   ========================================================== */
+@media (max-width: 860px) {
+  .about { grid-template-columns: 1fr; gap: 32px; }
+  .work { grid-template-columns: 1fr; }
+  .work-cover { min-height: 190px; padding: 26px; }
+  .work-body { padding: 30px 26px; }
+  .orb-1 { width: 110px; height: 110px; right: -30px; top: 10%; }
+  .orb-2 { display: none; }
+}
+@media (max-width: 640px) {
+  body { line-height: 1.85; }
+  .wrap, .nav .inner { padding-left: 20px; padding-right: 20px; }
+  .nav .links { gap: 14px; font-size: 13px; }
+  .nav .links a.hide-sm { display: none; }
+  .hero { padding: 60px 0 48px; min-height: auto; }
+  .traits { grid-template-columns: 1fr; }
+  .section { padding: 60px 0; }
+  .outro { padding: 70px 0; }
+}
+
+/* 系统设置了「减少动画」就全部停掉，尊重使用者的偏好 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== 顶部导航 ===================== -->
+<nav class="nav">
+  <div class="inner">
+    <span class="brand">鳗鱼不想动</span>
+    <div class="links">
+      <a href="#about">关于我</a>
+      <a href="#traits" class="hide-sm">我的样子</a>
+      <a href="#work">作品</a>
+      <a href="#contact">联系</a>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- ===================== 首屏 ===================== -->
+  <header class="hero">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+
+    <p class="eyebrow reveal">Hello, 很高兴认识你</p>
+
+    <h1 class="reveal">
+      鳗鱼<span class="lazy">不想动</span>
+    </h1>
+
+    <div class="rule"></div>
+
+    <p class="lead reveal">
+      一个热情开朗的女孩子，喜欢浪漫，也在认真对待每一件正经事。
+      朋友说和我在一起总是很开心——<em>这大概是我最珍惜的一句评价</em>。
+    </p>
+
+    <div class="actions reveal">
+      <a class="btn btn-solid" href="#about">认识我一下</a>
+      <a class="btn btn-ghost" href="https://github.com/Maryn0128" target="_blank" rel="noopener">
+        GitHub 主页 ↗
+      </a>
+    </div>
+  </header>
+
+  <!-- ===================== 关于我 ===================== -->
+  <section class="section" id="about">
+    <div class="section-head reveal">
+      <span class="tag">ABOUT</span>
+      <h2>关于我</h2>
+    </div>
+
+    <div class="about">
+      <div class="reveal">
+        <p>
+          我是<strong>鳗鱼不想动</strong>。名字听起来懒懒的，其实我挺爱折腾——
+          喜欢把平常的日子过出一点花样，喜欢浪漫的东西，也喜欢把事情做好的那种踏实感。
+        </p>
+        <p>
+          性格上大概是<strong>「外放」加「靠谱」</strong>的组合。和人相处的时候热闹、爱笑，
+          朋友跟我待在一起通常不用绷着；真轮到做事，我又会变得很认真，
+          答应下来的事会放在心上，做到位才安心。
+        </p>
+        <p>
+          这个页面是我自己写的第一块「自留地」。没有用模板，一行一行敲出来的——
+          算是把「喜欢浪漫」和「认真做事」这两种性格，都放进去了。
+        </p>
+      </div>
+
+      <aside class="facts reveal">
+        <dl>
+          <dt>NAME</dt>
+          <dd>鳗鱼不想动</dd>
+          <dt>性格</dt>
+          <dd>热情开朗 · 认真负责</dd>
+          <dt>喜欢</dt>
+          <dd>浪漫，以及一切有仪式感的小事</dd>
+          <dt>正在做</dt>
+          <dd>写点小项目，学点新东西</dd>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===================== 四个特质 ===================== -->
+  <section class="section" id="traits">
+    <div class="section-head reveal">
+      <span class="tag">CHARACTER</span>
+      <h2>我的样子</h2>
+    </div>
+
+    <div class="traits">
+      <article class="trait reveal">
+        <span class="no">01</span>
+        <h3>热情开朗</h3>
+        <p>爱笑，也爱说话。气氛冷下来的时候，我通常是那个先开口的人。</p>
+      </article>
+
+      <article class="trait reveal">
+        <span class="no">02</span>
+        <h3>多才多艺</h3>
+        <p>喜欢尝试各种新鲜事，学得快，也愿意为一个细节反复琢磨。</p>
+      </article>
+
+      <article class="trait reveal">
+        <span class="no">03</span>
+        <h3>有点浪漫</h3>
+        <p>相信生活需要一点仪式感：一束花、一句留白的话、一个刚好赶上的黄昏。</p>
+      </article>
+
+      <article class="trait reveal">
+        <span class="no">04</span>
+        <h3>认真负责</h3>
+        <p>玩的时候尽兴，做事的时候不含糊。交到我手上的事，我会当回事。</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== 作品 ===================== -->
+  <section class="section" id="work">
+    <div class="section-head reveal">
+      <span class="tag">WORK</span>
+      <h2>做过的东西</h2>
+    </div>
+
+    <article class="work reveal">
+      <!-- 左边这个缩略图完全由 CSS 画出来，不需要图片文件 -->
+      <div class="work-cover">
+        <div class="mock">
+          <div class="mock-title">猜数字小游戏</div>
+          <div class="mock-stats">
+            <div class="mock-stat"><b>3</b>已猜次数</div>
+            <div class="mock-stat"><b>38–49</b>可能范围</div>
+          </div>
+          <div class="mock-input"></div>
+          <div class="mock-msg">小了 ↑ 再猜大一点</div>
+          <div class="chips"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+
+      <div class="work-body">
+        <span class="kicker">FIRST PROJECT</span>
+        <h3>猜数字小游戏</h3>
+        <p>
+          电脑随机想一个数，你来猜，它会告诉你「大了」还是「小了」。
+          做了网页版和命令行版，还有一档反向玩法——你心里想数字，让电脑来猜。
+        </p>
+
+        <ul class="tags">
+          <li>Python</li>
+          <li>HTML / CSS</li>
+          <li>JavaScript</li>
+          <li>Git</li>
+        </ul>
+
+        <div class="work-links">
+          <a href="./play.html">在线试玩 →</a>
+          <a href="https://github.com/Maryn0128/guess-number" target="_blank" rel="noopener">看看源码 ↗</a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ===================== 结尾 + 联系 ===================== -->
+  <section class="outro" id="contact">
+    <p class="hi reveal">很高兴认识你</p>
+    <p class="reveal">
+      想聊聊，或者只是想找个人说说话——<br>
+      都可以从 GitHub 找到我。
+    </p>
+
+    <a class="contact-box reveal" href="https://github.com/Maryn0128" target="_blank" rel="noopener">
+      <span class="icon">
+        <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                   0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                   -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                   .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                   -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27
+                   .68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
+                   .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48
+                   0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+      </span>
+      <span>github.com/Maryn0128</span>
+    </a>
+  </section>
+</main>
+
+<footer>
+  © <span id="year">2026</span> 鳗鱼不想动
+  <span class="dot">·</span> 用 HTML 和 CSS 手写而成
+  <span class="dot">·</span> 没有用任何框架
+</footer>
+
+<script>
+/* ==========================================================
+   页面交互：只有两件事，都很短
+   1) 元素滚动到视口时才淡入
+   2) 页脚年份自动取当前年
+   ========================================================== */
+
+// 1) 淡入效果：用 IntersectionObserver 监听「有没有露出来」
+const reveals = document.querySelectorAll('.reveal');
+
+// 如果系统设置了「减少动画」，就直接全部显示，不做任何过渡
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (reduceMotion || !('IntersectionObserver' in window)) {
+  reveals.forEach(function (el) { el.classList.add('in'); });
+} else {
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);   // 出现过一次就不再监听，省性能
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(function (el) { observer.observe(el); });
+}
+
+// 2) 页脚年份
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
